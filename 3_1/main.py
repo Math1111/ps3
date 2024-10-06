@@ -9,6 +9,7 @@ KEY_S=83
 KEY_A=65
 KEY_D=68
 
+
 def key_press(event):
     if event.keycode == KEY_W:
         player.forvard()
