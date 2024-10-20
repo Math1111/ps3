@@ -6,7 +6,7 @@ from tkinter import *
 class Tank:
     __count = 0
     # 1 в параметры объекта добавить картинки (путь до картинк)
-    def __init__(self, canvas, x, y,model = 'Т-14 Армата', ammo = 100, speed = 1,
+    def __init__(self, canvas, x, y,model = 'Т-14 Армата', ammo = 100, speed = 0.2,
                  file_up = '../img/tankT34_up.png',
                  file_down = '../img/tankT34_down.png',
                  file_left = '../img/tankT34_left.png',
@@ -30,6 +30,8 @@ class Tank:
         self.__y = y
         self.__vx = 0
         self.__vy = 0
+        self.__dx = 0
+        self.__dy = 0
         if self.__x < 0:
             self.__x = 0
         if self.__y < 0:
@@ -69,15 +71,15 @@ class Tank:
         self.__vy = 0
         self.__canvas.itemconfig(self.__id, image = self.__skin_right)
 
-
     def update(self):
         if self.__fuel > self.__speed:
-            self.__x += self.__vx * self.__speed
-            self.__y += self.__vy * self.__speed
-            self.__fuel -=self.__speed
+            self.__dx = self.__vx * self.__speed
+            self.__dy = self.__vy * self.__speed
+            self.__x += self.__dx
+            self.__x += self.__dx
+            self.__fuel -= self.__speed
             self.__update_hitbox()
             self.__repaint()
-
 
 # 3 Изменим метод __create
     def __create(self):
@@ -93,6 +95,13 @@ class Tank:
 
     def inersects(self, other_tank):
         return self.__hitbox.intersects(other_tank.__hitbox)
+
+    def undo_move(self):
+        self.__x -= self.__dx
+        self.__y -= self.__dy
+        self.__fuel += self.__speed
+        self.__update_hitbox()
+        self.__repaint()
 
 
     def get_x(self):

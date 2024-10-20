@@ -17,8 +17,9 @@ def update():
     w.after(1000//FPS,update)
 
 def check_collision():
-    if player.inersects(enemy):
+    if player.intersects(enemy):
         print("Такни столкнулись")
+        player.undo_move()
 
 def key_press(event):
     if event.keycode == KEY_W:
