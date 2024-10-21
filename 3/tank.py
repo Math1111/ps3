@@ -76,7 +76,7 @@ class Tank:
             self.__dx = self.__vx * self.__speed
             self.__dy = self.__vy * self.__speed
             self.__x += self.__dx
-            self.__x += self.__dx
+            self.__x += self.__dy
             self.__fuel -= self.__speed
             self.__update_hitbox()
             self.__repaint()
@@ -93,9 +93,6 @@ class Tank:
     def __update_hitbox(self):
         self.__hitbox.moveto(self.__x, self.__y)
 
-    def inersects(self, other_tank):
-        return self.__hitbox.intersects(other_tank.__hitbox)
-
     def undo_move(self):
         self.__x -= self.__dx
         self.__y -= self.__dy
@@ -103,6 +100,8 @@ class Tank:
         self.__update_hitbox()
         self.__repaint()
 
+    def inersects(self, other_tank):
+        return self.__hitbox.intersects(other_tank.__hitbox)
 
     def get_x(self):
         return self.__x

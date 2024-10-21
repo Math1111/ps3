@@ -17,7 +17,7 @@ def update():
     w.after(1000//FPS,update)
 
 def check_collision():
-    if player.intersects(enemy):
+    if player.inersects(enemy):
         print("Такни столкнулись")
         player.undo_move()
 
