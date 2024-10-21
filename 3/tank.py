@@ -6,7 +6,7 @@ from tkinter import *
 class Tank:
     __count = 0
     # 1 в параметры объекта добавить картинки (путь до картинк)
-    def __init__(self, canvas, x, y,model = 'Т-14 Армата', ammo = 100, speed = 0.2,
+    def __init__(self, canvas, x, y,model = 'Т-14 Армата', ammo = 100, speed = 5,
                  file_up = '../img/tankT34_up.png',
                  file_down = '../img/tankT34_down.png',
                  file_left = '../img/tankT34_left.png',
@@ -76,8 +76,7 @@ class Tank:
             self.__dx = self.__vx * self.__speed
             self.__dy = self.__vy * self.__speed
             self.__x += self.__dx
-            self.__x += self.__dy
-            self.__fuel -= self.__speed
+            self.__y += self.__dy
             self.__update_hitbox()
             self.__repaint()
 
